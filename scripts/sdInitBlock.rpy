@@ -13,9 +13,14 @@ label initMap:
     $ sdInitMapZones()
     return
 
+label initRnd:
+    # Переменная помощи Мику: используется для перехода из плохого рута в стандартный.
+    $ mi_salvation = renpy.random.random()
+    return
+
 label initVars: 
     # Версия мода на данный момент.
-    $ sd_version =      "pre0.3.5"
+    $ sd_version =      "pre0.3.6"
     
     # Переменные для отрисовки виджета.
     $ sdStart =                         False
@@ -172,6 +177,11 @@ label initImg:
     image bg ext_warehouse_day =                sdGetImage("bg/ext_warehouse_day.jpg")
     image bg ext_warehouse_night =              sdGetImage("bg/ext_warehouse_night.jpg")
     image bg int_warehouse_day =                sdGetImage("bg/int_shed.jpg")
+    image bg ext_backyard_day =                 sdGetImage("bg/ext_backyard_day.jpg")
+    image bg ext_backyard_night =               sdGetImage("bg/ext_backyard_night.jpg")
+    image bg ext_backyard_sunset =              sdGetImage("bg/ext_backyard_sunset.jpg")
+    image bg ext_wayhome_day =                  sdGetImage("bg/ext_wayhome_day.jpg")
+    image bg int_city_clubs_day =               sdGetImage("bg/int_city_clubs_day.jpg")
     
     # CG разных сортов 
     image cg d1_dining_work_1 =                 sdGetImage("cg/d1_dining_work_1.jpg")
@@ -451,7 +461,7 @@ init python:
 return
 
 init -1000 python:
-    sdDefautPath = "../559354092/SovietDays/"
+    sdDefautPath = '../559354092/SovietDays/'
 
 init -998 python:
     def sdGetImage(file):
@@ -465,15 +475,8 @@ init -998 python:
         
 python early:
     def sdPlayMod():
-        sdDisc()
-        if "customMainMusic" not in filters:
-            config.main_menu_music = always_summer
         rgsn = renpy.game.script.namemap
         rgsn["prologue"],rgsn["sdPrologueOriginal"] = rgsn["sdPrologueOriginal"],rgsn["prologue"]
-    
-init -1 python:
-    def sdDisc():
-        config.label_overrides["splashscreen_2"] = "sdSplash"
 
 
 # Менюшка ^_^       
